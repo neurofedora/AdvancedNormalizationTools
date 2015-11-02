@@ -1,0 +1,25 @@
+From ac0885a1a8791154f45cfd64d566a5dfe7d30583 Mon Sep 17 00:00:00 2001
+From: Nick Tustison <ntustison@gmail.com>
+Date: Thu, 10 Sep 2015 07:26:39 -0700
+Subject: [PATCH] ENH:  Alternate input type.  Necessary for other platforms?
+
+---
+ Examples/antsSurf.cxx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Examples/antsSurf.cxx b/Examples/antsSurf.cxx
+index c89e07c..a868731 100644
+--- a/Examples/antsSurf.cxx
++++ b/Examples/antsSurf.cxx
+@@ -573,7 +573,7 @@ int antsImageToSurface( itk::ants::CommandLineParser *parser )
+ 
+     // Read in color table
+ 
+-    std::ifstream fileStr( lookupTableFile );
++    std::ifstream fileStr( lookupTableFile.c_str() );
+     if( !fileStr.is_open() )
+       {
+       std::cerr << " Could not open file " << lookupTableFile << '\n';
+-- 
+2.6.2
+

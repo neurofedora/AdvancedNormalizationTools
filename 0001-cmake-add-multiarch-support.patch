@@ -1,0 +1,66 @@
+From 6083245c6f677a07b91df4873a521b462c816603 Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Mon, 2 Nov 2015 21:40:56 +0100
+Subject: [PATCH] cmake: add multiarch support
+
+Reference: https://github.com/stnava/ANTs/issues/243
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ Common.cmake                             | 6 ++++--
+ Examples/CMakeLists.txt                  | 4 ++--
+ ExternalApplications/MALF/CMakeLists.txt | 4 ++--
+ 3 files changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/Common.cmake b/Common.cmake
+index cd02324..0ca83ab 100644
+--- a/Common.cmake
++++ b/Common.cmake
+@@ -112,14 +112,16 @@ if(NOT COMMAND SETIFEMPTY)
+   endmacro()
+ endif()
+ 
++SETIFEMPTY(LIB_INSTALL_DIR lib${LIB_SUFFIX})
++
+ #-----------------------------------------------------------------------------
+ SETIFEMPTY(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
+ SETIFEMPTY(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
+ SETIFEMPTY(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
+ 
+ #-----------------------------------------------------------------------------
+-SETIFEMPTY(CMAKE_INSTALL_LIBRARY_DESTINATION lib)
+-SETIFEMPTY(CMAKE_INSTALL_ARCHIVE_DESTINATION lib)
++SETIFEMPTY(CMAKE_INSTALL_LIBRARY_DESTINATION ${LIB_INSTALL_DIR})
++SETIFEMPTY(CMAKE_INSTALL_ARCHIVE_DESTINATION ${LIB_INSTALL_DIR})
+ SETIFEMPTY(CMAKE_INSTALL_RUNTIME_DESTINATION bin)
+ 
+ #-------------------------------------------------------------------------
+diff --git a/Examples/CMakeLists.txt b/Examples/CMakeLists.txt
+index a96a251..cf52e86 100644
+--- a/Examples/CMakeLists.txt
++++ b/Examples/CMakeLists.txt
+@@ -44,8 +44,8 @@ macro(STANDARD_ANTS_BUILD ANTS_FUNCTION_NAME EXTRA_LIBS)
+ 
+   install(TARGETS l_${ANTS_FUNCTION_NAME} ${ANTS_FUNCTION_NAME}
+     RUNTIME DESTINATION bin
+-    LIBRARY DESTINATION lib
+-    ARCHIVE DESTINATION lib
++    LIBRARY DESTINATION ${LIB_INSTALL_DIR}
++    ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
+   )
+ 
+ endmacro()
+diff --git a/ExternalApplications/MALF/CMakeLists.txt b/ExternalApplications/MALF/CMakeLists.txt
+index 1907e4f..061a5fa 100755
+--- a/ExternalApplications/MALF/CMakeLists.txt
++++ b/ExternalApplications/MALF/CMakeLists.txt
+@@ -18,5 +18,5 @@ target_link_libraries(bl ${ITK_LIBRARIES} )
+ 
+ install(TARGETS jointfusion sa bl
+         RUNTIME DESTINATION bin
+-        LIBRARY DESTINATION lib
+-        ARCHIVE DESTINATION lib)
++        LIBRARY DESTINATION ${LIB_INSTALL_DIR}
++        ARCHIVE DESTINATION ${LIB_INSTALL_DIR})
+-- 
+2.6.2
+

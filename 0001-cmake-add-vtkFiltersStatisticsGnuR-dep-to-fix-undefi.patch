@@ -1,0 +1,25 @@
+From 93ec69150b5e3c65d4895550803d85aa18d1555a Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Mon, 2 Nov 2015 20:07:30 +0100
+Subject: [PATCH] cmake: add vtkFiltersStatisticsGnuR dep to fix undefined ref
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ Examples/CMakeLists.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Examples/CMakeLists.txt b/Examples/CMakeLists.txt
+index 30def0f..73a0483 100644
+--- a/Examples/CMakeLists.txt
++++ b/Examples/CMakeLists.txt
+@@ -164,6 +164,7 @@ find_package(VTK COMPONENTS
+    vtkIOPLY
+    vtkRenderingOpenGL
+    vtkFiltersModeling
++   vtkFiltersStatisticsGnuR
+    vtkImagingStencil
+    vtkImagingGeneral
+    vtkRenderingAnnotation
+-- 
+2.6.2
+

@@ -1,0 +1,27 @@
+From 165e345faf4dfacb84f2cfad3c5f068720c45d3c Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Mon, 2 Nov 2015 20:30:17 +0100
+Subject: [PATCH] cmake: quote optimization flag for compiler check
+
+Reference: https://github.com/stnava/ANTs/issues/234
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ CMake/ITKSetStandardCompilerFlags.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMake/ITKSetStandardCompilerFlags.cmake b/CMake/ITKSetStandardCompilerFlags.cmake
+index 469e02b..d5b6637 100644
+--- a/CMake/ITKSetStandardCompilerFlags.cmake
++++ b/CMake/ITKSetStandardCompilerFlags.cmake
+@@ -278,7 +278,7 @@ macro(check_compiler_platform_flags)
+     set(ITK_CXX_DISABLE_OPTIMIZATION_FLAG "-O0")
+   endif()
+   if(DEFINED ITK_CXX_DISABLE_OPTIMIZATION_FLAG)
+-    CHECK_CXX_SOURCE_COMPILES(${ITK_CXX_DISABLE_OPTIMIZATION_FLAG} CXX_HAS_DISABLE_OPTIMIZATION_FLAG)
++    CHECK_CXX_SOURCE_COMPILES("${ITK_CXX_DISABLE_OPTIMIZATION_FLAG}" CXX_HAS_DISABLE_OPTIMIZATION_FLAG)
+   endif()
+ endmacro()#End the platform check function
+ 
+-- 
+2.6.2
+

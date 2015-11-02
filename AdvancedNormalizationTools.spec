@@ -70,6 +70,10 @@ pushd build
   %make_install
 popd
 
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
 %files
 %license COPYING.txt
 %doc README.md
